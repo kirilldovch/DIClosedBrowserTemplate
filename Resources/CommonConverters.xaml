@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:DIClosedBrowserTemplate.Converters">
+    <converters:ImageConverter Width="400" Height="400" x:Key="ImageConverter"/>
+    <converters:ResolutionConverter x:Key="ResolutionConverter"/>
+    <converters:Resolution4KConverter x:Key="Resolution4KConverter"/>
+</ResourceDictionary>

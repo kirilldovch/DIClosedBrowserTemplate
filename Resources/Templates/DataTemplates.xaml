@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <DataTemplate DataType="{x:Type system:String}" x:Key="MainKeyboardTextTemplate">
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+            <ContentPresenter Content="{Binding}"/>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

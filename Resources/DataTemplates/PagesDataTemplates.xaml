@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:pages="clr-namespace:DIClosedBrowserTemplate.ViewModels.Pages"
+                    xmlns:pages1="clr-namespace:DIClosedBrowserTemplate.Views.Pages">
+    <DataTemplate DataType="{x:Type pages:MainPageViewModel}">
+        <pages1:MainView DataContext="{Binding}"/>
+    </DataTemplate>
+</ResourceDictionary>

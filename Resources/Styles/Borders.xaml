@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:components="clr-namespace:MainComponents.Components;assembly=MainComponents">
+    <Style TargetType="Border" x:Key="DefaultKeyboardBorderStyle">
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="0 0 1.5 3" />
+        <Style.Triggers>
+            <DataTrigger
+                Binding="{Binding IsMouseOver,
+                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=components:RoundedButton}}">
+                <Setter Property="BorderThickness" Value="0 0 10 15" />
+                <Setter Property="Background" Value="White"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

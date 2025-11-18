@@ -1,0 +1,12 @@
+﻿{
+  "host": "https://github.com/kirilldovch",
+  "id": "169",
+  "available_addresses": [
+
+  ],
+  "frame_rate": 60,
+  "scale": 5,
+  "is_clear_cache": false,
+  "media_interval": 15,
+  "debug_mode": false
+}

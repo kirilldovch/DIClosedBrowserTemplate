@@ -1,0 +1,244 @@
+﻿<Window x:Class="DIClosedBrowserTemplate.Views.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:components="clr-namespace:MainComponents.Components;assembly=MainComponents"
+        xmlns:windows="clr-namespace:DIClosedBrowserTemplate.ViewModels.Windows"
+        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:handlers="clr-namespace:DIClosedBrowserTemplate.Helpers.Handlers"
+        mc:Ignorable="d"
+        d:DesignHeight="3840"
+        d:DesignWidth="2160"
+        Title="MainWindow"
+        Height="{Binding RelativeSource={RelativeSource Self},
+    Converter={StaticResource ResolutionConverter},
+    ConverterParameter=Height}"
+        Width="{Binding RelativeSource={RelativeSource Self},
+    Converter={StaticResource ResolutionConverter},
+    ConverterParameter=Width}"
+        WindowState="Maximized"
+        WindowStyle="None"
+        d:DataContext="{d:DesignInstance windows:MainWindowViewModel}">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction
+                Command="{Binding LoadedCommand}" />
+        </b:EventTrigger>
+        <b:EventTrigger EventName="Closed">
+            <b:InvokeCommandAction
+                Command="{Binding ClosingCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <Viewbox>
+        <Grid
+            Height="{Binding RelativeSource={RelativeSource Self},
+            Converter={StaticResource Resolution4KConverter},
+            ConverterParameter=Height}"
+            Width="{Binding RelativeSource={RelativeSource Self},
+            Converter={StaticResource Resolution4KConverter},
+            ConverterParameter=Width}">
+            <!--#region Browser -->
+
+            <wpf:ChromiumWebBrowser Name="ChromiumWebBrowser"
+                                    Address="{Binding Url, Mode=TwoWay}">
+                <wpf:ChromiumWebBrowser.DownloadHandler>
+                    <handlers:DownloadHandler />
+                </wpf:ChromiumWebBrowser.DownloadHandler>
+                <wpf:ChromiumWebBrowser.RequestHandler>
+                    <handlers:CustomRequestHandler />
+                </wpf:ChromiumWebBrowser.RequestHandler>
+                <wpf:ChromiumWebBrowser.MenuHandler>
+                    <handlers:CustomMenuHandler />
+                </wpf:ChromiumWebBrowser.MenuHandler>
+                <wpf:ChromiumWebBrowser.LifeSpanHandler>
+                    <handlers:CustomLifeSpanHandler />
+                </wpf:ChromiumWebBrowser.LifeSpanHandler>
+            </wpf:ChromiumWebBrowser>
+
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoading, ElementName=ChromiumWebBrowser}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Border Background="White" />
+                <ContentPresenter ContentTemplate="{StaticResource PreloaderIcon}"
+                                  Width="400" Height="400" />
+            </Grid>
+
+            <Border VerticalAlignment="Bottom"
+                    Visibility="Visible">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="0" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsChecked,
+                                        ElementName=SpecialFeaturesButton}"
+                                        Value="True">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation By="0"
+                                                                     To="300"
+                                                                     Duration="{StaticResource BaseDuration}"
+                                                                     Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation By="330"
+                                                                     To="0"
+                                                                     Duration="{StaticResource BaseDuration}"
+                                                                     Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+
+                        <CheckBox x:Name="SpecialFeaturesButton"
+                                  Style="{StaticResource SpecialFeaturesButtonStyle}"
+                                  Margin="0 0 0 -3"
+                                  Width="400"
+                                  Height="80" />
+
+                        <Border Background="{DynamicResource ButtonPanelBackground}"
+                                CornerRadius="60 60 0 0"
+                                BorderThickness="0">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal"
+                                            Height="300">
+                                    <Button Style="{StaticResource CustomButtonStyle}"
+                                            Visibility="Visible"
+                                            Width="200"
+                                            Height="200"
+                                            Command="{Binding GoToMainPageCommand}"
+                                            Margin="40 0 40 0">
+                                        <ContentPresenter ContentTemplate="{StaticResource HomeIcon}"
+                                                          Width="100" />
+                                    </Button>
+                                    <Button Style="{StaticResource CustomButtonStyle}"
+                                            Width="200"
+                                            Height="200"
+                                            Visibility="Visible"
+                                            Command="{Binding BackCommand, ElementName=ChromiumWebBrowser}"
+                                            Margin="0 0 20 0">
+                                        <ContentPresenter ContentTemplate="{StaticResource BackIcon}"
+                                                          Width="100" />
+                                    </Button>
+                                </StackPanel>
+
+                                <CheckBox x:Name="KeyboardCheckBox"
+                                          Style="{StaticResource KeyboardCheckBox}"
+                                          Width="200"
+                                          Height="200"
+                                          Visibility="Visible"
+                                          HorizontalAlignment="Right"
+                                          Margin="0 0 40 0">
+                                    <ContentPresenter ContentTemplate="{StaticResource KeyboardIcon}"
+                                                      Width="100" />
+                                </CheckBox>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Width="1300"
+                    Height="500">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=KeyboardCheckBox}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <StackPanel>
+                    <Border Background="{DynamicResource ButtonPanelBackground}"
+                            CornerRadius="40 40 0 0"
+                            BorderThickness="0"
+                            Margin="0 0 0 -3"
+                            Height="50"
+                            Width="400">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="MouseDown">
+                                <b:InvokeCommandAction Command="{Binding StartMoveKeyboardCommand}"
+                                                       PassEventArgsToCommand="True" />
+                            </b:EventTrigger>
+                            <b:EventTrigger EventName="MouseMove">
+                                <b:InvokeCommandAction Command="{Binding DragKeyboardCommand}"
+                                                       PassEventArgsToCommand="True" />
+                            </b:EventTrigger>
+                            <b:EventTrigger EventName="MouseUp">
+                                <b:InvokeCommandAction Command="{Binding EndMoveKeyboardCommand}"
+                                                       PassEventArgsToCommand="True" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </Border>
+                    <Border Background="{StaticResource ButtonPanelBackground}"
+                            CornerRadius="15">
+                        <components:Keyboard Width="1300"
+                                             Height="450"
+                                             ButtonBaseWidth="100"
+                                             ButtonBaseHeight="110"
+                                             ButtonBaseMargin="5"
+                                             MainButtonStyle="{StaticResource MainKeyboardButtonStyles}"
+                                             AdditionalButtonStyle="{StaticResource AdditionalButtonStyle}" />
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!--#endregion-->
+
+            <ContentPresenter
+                Content="{Binding CurrentViewModel}" />
+
+            <components:ModalControl
+                Panel.ZIndex="2"
+                Content="{Binding CurrentModalViewModel}"
+                IsOpen="{Binding IsModalOpen}" />
+
+            <Button
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Panel.ZIndex="3000">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="PreviewMouseDown">
+                        <b:InvokeCommandAction Command="{Binding StartTimerCommand}" />
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="PreviewMouseUp">
+                        <b:InvokeCommandAction Command="{Binding StopTimerCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border Width="120" Height="120" Background="Transparent" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Viewbox>
+</Window>

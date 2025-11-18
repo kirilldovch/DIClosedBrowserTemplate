@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:popups="clr-namespace:DIClosedBrowserTemplate.ViewModels.Popups"
+                    xmlns:popups1="clr-namespace:DIClosedBrowserTemplate.Views.Popups">
+    <DataTemplate DataType="{x:Type popups:PasswordPopupViewModel}">
+        <popups1:PasswordPopupView DataContext="{Binding}"/>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,21 @@
+﻿<Application x:Class="DIClosedBrowserTemplate.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MainComponents;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/Resources/CommonBrushes.xaml" />
+                <ResourceDictionary Source="/Resources/CommonConverters.xaml" />
+                <ResourceDictionary Source="/Resources/Animations/Durations.xaml" />
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/Resources/Templates/DataTemplates.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/Borders.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/TextStyles.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="/Resources/DataTemplates/PopupDataTemplates.xaml" />
+                <ResourceDictionary Source="/Resources/DataTemplates/PagesDataTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

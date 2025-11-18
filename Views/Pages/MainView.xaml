@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="DIClosedBrowserTemplate.Views.Pages.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="clr-namespace:DIClosedBrowserTemplate.ViewModels.Pages"
+             mc:Ignorable="d"
+             d:DesignHeight="3840" d:DesignWidth="2160"
+             d:DataContext="{d:DesignInstance pages:MainPageViewModel}"
+             x:Name="MainPage">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush
+                ImageSource="{Binding BackgroundImagePath}" />
+        </Grid.Background>
+
+        <Button Style="{StaticResource NavigationButtonStyle}"
+                Command="{Binding GoToPageCommand}"
+                CommandParameter="https://github.com/kirilldovch"
+                Margin="0 0 0 200">
+        </Button>
+    </Grid>
+</UserControl>
