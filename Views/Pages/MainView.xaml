@@ -16,7 +16,7 @@
 
         <Button Style="{StaticResource NavigationButtonStyle}"
                 Command="{Binding GoToPageCommand}"
-                CommandParameter="https://github.com/kirilldovch"
+                CommandParameter="https://github.com/"
                 Margin="0 0 0 200">
         </Button>
     </Grid>

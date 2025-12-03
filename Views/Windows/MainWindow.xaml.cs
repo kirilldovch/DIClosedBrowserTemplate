@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using CefSharp;
 
 namespace DIClosedBrowserTemplate.Views.Windows
 {

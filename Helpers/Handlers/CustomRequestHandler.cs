@@ -15,15 +15,21 @@ public class CustomRequestHandler : RequestHandler, IRequestHandler
         var uri = new Uri(address);
         var origin = $"{uri.Scheme}://{uri.Authority}";
 
-        if (SettingsModel.GetSettings().DebugMode) browser.ShowDevTools();
+        if (!string.IsNullOrEmpty(address))
+        {
+            settings.AvailableAddresses.Add(origin);
+            var i = settings.AvailableAddresses.Count(availableAddress => request.Url.TrimEnd().StartsWith(availableAddress));
+            if (i == 0)
+            {
+                File.AppendAllText("DebugCefSharp.txt", $"Сообщение от CustomRequsestHandler: {request.Url} заблокирован{Environment.NewLine}");
+                browser.StopLoad();
+                return true;
+            }
+        }
 
-        if (origin == null || string.IsNullOrEmpty(address))
-            return OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
-        settings.AvailableAddresses.Add(origin);
-        var i = settings.AvailableAddresses.Count(availableAddress => request.Url.TrimEnd().StartsWith(availableAddress));
-        if (i != 0) return OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
-        File.AppendAllText("DebugCefSharp.txt", $"Сообщение от CustomRequsestHandler: {request.Url} заблокирован{Environment.NewLine}");
-        browser.StopLoad();
-        return true;
+        browser.SetZoomLevel(SettingsModel.GetSettings().Scale);
+
+        return OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
+
     }
 }

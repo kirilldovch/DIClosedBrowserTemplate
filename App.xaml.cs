@@ -28,7 +28,7 @@ namespace DIClosedBrowserTemplate
         {
             if (DebugHelper.IsRunningInDebugMode) throw e.Exception;
             var logger = _appHost.Services.GetRequiredService<ILogger>();
-            logger.Error(e.Exception, "Неизвестная ошибка");
+            logger.Error(e.Exception, "Неизвестная ошибка" + e.Exception.StackTrace);
             e.Handled = true;
         }
 

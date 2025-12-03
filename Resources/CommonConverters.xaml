@@ -4,4 +4,6 @@
     <converters:ImageConverter Width="400" Height="400" x:Key="ImageConverter"/>
     <converters:ResolutionConverter x:Key="ResolutionConverter"/>
     <converters:Resolution4KConverter x:Key="Resolution4KConverter"/>
+    <converters:JavaScriptMessageConverter x:Key="JavaScriptMessageConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 </ResourceDictionary>

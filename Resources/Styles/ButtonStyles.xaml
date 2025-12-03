@@ -63,6 +63,11 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Button" x:Key="DisableButtonsStyle" BasedOn="{StaticResource CustomButtonStyle}">
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="200"/>
+    </Style>
+
     <Style TargetType="CheckBox" x:Key="KeyboardCheckBox" BasedOn="{StaticResource BaseButtonStyle}">
         <Setter Property="Template">
             <Setter.Value>
@@ -84,12 +89,33 @@
                         <Border Background="{DynamicResource ButtonPanelBackground}"
                                 CornerRadius="60 60 0 0"
                                 BorderThickness="0">
-                            <ContentPresenter ContentTemplate="{DynamicResource ArrowIcon}"
+                            <ContentPresenter ContentTemplate="{TemplateBinding Content}"
                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Name="Presenter"
                                               Height="60"
                                               Width="60" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="CheckBox" x:Key="DisableModeButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <Border Background="{DynamicResource ButtonPanelBackground}"
+                                CornerRadius="60 0 0 60"
+                                BorderThickness="0">
+                            <ContentPresenter ContentTemplate="{TemplateBinding Content}"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Name="Presenter"
+                                              Height="60"
+                                              Width="60"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>

@@ -1,12 +1,18 @@
 ﻿{
-  "host": "https://github.com/kirilldovch",
-  "id": "169",
+  "host": "https://github.com/",
+  "id": "",
   "available_addresses": [
-
+    "https://github.com/",
+    "https://izhsobor.ru/",
   ],
+
   "frame_rate": 60,
-  "scale": 5,
-  "is_clear_cache": false,
+  "scale": 3,
+  "is_clear_cache": true,
+
+  "is_closed_browser": true,
+  "disable_mode": true,
+
   "media_interval": 15,
-  "debug_mode": false
+  "debug_mode": true
 }

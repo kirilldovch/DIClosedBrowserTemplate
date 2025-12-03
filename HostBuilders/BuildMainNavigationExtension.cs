@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using DIClosedBrowserTemplate.Models.Browser;
 using DIClosedBrowserTemplate.ViewModels.Pages;
 using DIClosedBrowserTemplate.ViewModels.Windows;
 using Microsoft.Extensions.Configuration;

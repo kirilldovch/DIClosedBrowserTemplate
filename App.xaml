@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Resources/Styles/Borders.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/TextStyles.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/AdaptiveViewBoxStyles.xaml" />
                 <ResourceDictionary Source="/Resources/DataTemplates/PopupDataTemplates.xaml" />
                 <ResourceDictionary Source="/Resources/DataTemplates/PagesDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>

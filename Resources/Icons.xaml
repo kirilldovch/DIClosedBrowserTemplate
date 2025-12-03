@@ -148,19 +148,17 @@
                         </Setter>
                         <Setter Property="RenderTransform">
                             <Setter.Value>
-                                <RotateTransform Angle="180" />
+                                <RotateTransform Angle="0" />
                             </Setter.Value>
                         </Setter>
                         <Style.Triggers>
-                            <DataTrigger
-                                Binding="{Binding IsChecked,
-                                ElementName=SpecialFeaturesButton}"
-                                Value="True">
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=SpecialFeaturesButton}"
+                                         Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation By="180"
-                                                             To="0"
+                                            <DoubleAnimation By="0"
+                                                             To="180"
                                                              Duration="{StaticResource BaseDuration}"
                                                              Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)" />
                                         </Storyboard>
@@ -169,8 +167,8 @@
                                 <DataTrigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation By="0"
-                                                             To="180"
+                                            <DoubleAnimation By="180"
+                                                             To="0"
                                                              Duration="{StaticResource BaseDuration}"
                                                              Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)" />
                                         </Storyboard>
@@ -183,6 +181,57 @@
                 <Path
                     Data="M7.27486 3.83243L7.27189 3.82947L4.21288 0.766435C4.18857 0.742262 4.16172 0.720785 4.13279 0.702378L4.04471 0.654331L3.98465 0.634305H3.9406C3.8731 0.621898 3.8039 0.621898 3.7364 0.634305H3.64832L3.58025 0.67034C3.54231 0.690947 3.5073 0.71653 3.47614 0.746409L0.40511 3.82947C0.199463 4.03348 0.19813 4.36559 0.402145 4.57124L0.40511 4.5742C0.612409 4.77199 0.938532 4.77199 1.14585 4.5742L2.97565 2.7484C3.0546 2.671 3.18136 2.67223 3.25876 2.75119C3.29478 2.78792 3.31527 2.83711 3.31599 2.88854V8.85044C3.31597 9.14013 3.55078 9.37498 3.84047 9.375C4.13017 9.37502 4.365 9.14021 4.36504 8.85051V2.88854C4.36659 2.778 4.45747 2.68961 4.56802 2.69117C4.61944 2.6919 4.66864 2.71238 4.70537 2.7484L6.52718 4.5742C6.735 4.77454 7.06409 4.77454 7.27191 4.5742C7.47756 4.37019 7.47889 4.03808 7.27486 3.83243Z"
                     Fill="White" />
+            </Grid>
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="HorizontalArrowIcon">
+        <Viewbox>
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="RenderTransformOrigin">
+                            <Setter.Value>
+                                <Point X=".5"
+                                   Y=".5" />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <RotateTransform Angle="-90" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=DisableModeButton}"
+                                     Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation By="-90"
+                                                         To="90"
+                                                         Duration="{StaticResource BaseDuration}"
+                                                         Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation By="90"
+                                                         To="-90"
+                                                         Duration="{StaticResource BaseDuration}"
+                                                         Storyboard.TargetProperty="RenderTransform.(RotateTransform.Angle)" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Path
+                Data="M7.27486 3.83243L7.27189 3.82947L4.21288 0.766435C4.18857 0.742262 4.16172 0.720785 4.13279 0.702378L4.04471 0.654331L3.98465 0.634305H3.9406C3.8731 0.621898 3.8039 0.621898 3.7364 0.634305H3.64832L3.58025 0.67034C3.54231 0.690947 3.5073 0.71653 3.47614 0.746409L0.40511 3.82947C0.199463 4.03348 0.19813 4.36559 0.402145 4.57124L0.40511 4.5742C0.612409 4.77199 0.938532 4.77199 1.14585 4.5742L2.97565 2.7484C3.0546 2.671 3.18136 2.67223 3.25876 2.75119C3.29478 2.78792 3.31527 2.83711 3.31599 2.88854V8.85044C3.31597 9.14013 3.55078 9.37498 3.84047 9.375C4.13017 9.37502 4.365 9.14021 4.36504 8.85051V2.88854C4.36659 2.778 4.45747 2.68961 4.56802 2.69117C4.61944 2.6919 4.66864 2.71238 4.70537 2.7484L6.52718 4.5742C6.735 4.77454 7.06409 4.77454 7.27191 4.5742C7.47756 4.37019 7.47889 4.03808 7.27486 3.83243Z"
+                Fill="White">
+                </Path>
             </Grid>
         </Viewbox>
     </DataTemplate>

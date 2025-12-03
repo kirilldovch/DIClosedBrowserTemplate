@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using DIClosedBrowserTemplate.Models.Browser;
 using DIClosedBrowserTemplate.Models.Messages;
 using DIClosedBrowserTemplate.ViewModels.Windows;
 

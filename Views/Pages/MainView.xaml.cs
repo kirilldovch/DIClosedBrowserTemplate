@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using CefSharp;
+using System.Windows.Controls;
 
 namespace DIClosedBrowserTemplate.Views.Pages
 {
