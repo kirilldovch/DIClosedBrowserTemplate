@@ -85,7 +85,7 @@
                         </wpf:ChromiumWebBrowser.LifeSpanHandler>
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="Loaded">
-                                <b:InvokeCommandAction Command="{Binding BrowserInitializedCommand}"
+                                <b:InvokeCommandAction Command="{Binding BrowserLoadedCommand}"
                                                        CommandParameter="{Binding ElementName=ChromiumWebBrowser}" />
                             </b:EventTrigger>
                         </b:Interaction.Triggers>

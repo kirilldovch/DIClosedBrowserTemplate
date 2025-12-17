@@ -73,11 +73,14 @@ namespace DIClosedBrowserTemplate.ViewModels.Windows
         internal void CloseViewModel() => _closeNavigationService.Navigate();
 
         [RelayCommand]
-        private void BrowserInitialized(IWebBrowser browser)
+        private void BrowserLoaded(IWebBrowser browser)
         {
             _browser = browser;
+
+            _browser.FrameLoadEnd += OnFrameLoadEnd;
             _browser.JavascriptMessageReceived += JavascriptMessageReceivedHandler!;
         }
+
 
         [RelayCommand]
         private void Invert()
@@ -232,6 +235,13 @@ namespace DIClosedBrowserTemplate.ViewModels.Windows
             _sec++;
             if (_sec < 7) return;
             _passwordNavigationService.Navigate();
+        }
+        private void OnFrameLoadEnd(object? sender, FrameLoadEndEventArgs e)
+        {
+            Application.Current.Dispatcher.BeginInvoke(() =>
+            {
+                _browser.SetZoomLevel(SettingsModel.GetSettings().Scale);
+            });
         }
 
         [RelayCommand]

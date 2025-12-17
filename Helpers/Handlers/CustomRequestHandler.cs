@@ -27,8 +27,6 @@ public class CustomRequestHandler : RequestHandler, IRequestHandler
             }
         }
 
-        browser.SetZoomLevel(SettingsModel.GetSettings().Scale);
-
         return OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
 
     }
