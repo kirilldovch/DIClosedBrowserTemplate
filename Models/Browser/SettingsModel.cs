@@ -6,11 +6,11 @@ namespace DIClosedBrowserTemplate.Models.Browser;
 
 public class SettingsModel
 {
-    [JsonProperty("host")] 
-    public string Host { get; set; }
+    [JsonProperty("host")]
+    public string Host { get; set; } = string.Empty;
 
-    [JsonProperty("id")] 
-    public string Id { get; set; }
+    [JsonProperty("id")]
+    public string Id { get; set; } = string.Empty;
 
     [JsonProperty("available_addresses")]
     public List<string> AvailableAddresses { get; set; } = [];

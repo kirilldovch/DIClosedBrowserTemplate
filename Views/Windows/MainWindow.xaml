@@ -10,6 +10,7 @@
         xmlns:handlers="clr-namespace:DIClosedBrowserTemplate.Helpers.Handlers"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:controls="clr-namespace:DIClosedBrowserTemplate.Views.Controls"
+        xmlns:behaviors="clr-namespace:DIClosedBrowserTemplate.Helpers.Behaviors"
         mc:Ignorable="d"
         d:DesignHeight="3840"
         d:DesignWidth="2160"
@@ -35,7 +36,8 @@
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Viewbox>
-        <Grid Effect="{Binding Effect}"
+        <Grid Effect="{Binding IsInverted,
+            Converter={StaticResource ColorInvertConverter}}"
               Height="{Binding RelativeSource={RelativeSource Self},
                     Converter={StaticResource Resolution4KConverter},
                     ConverterParameter=Height}"
@@ -46,7 +48,8 @@
             <!--#region Magnifier -->
             <xctk:MagnifierManager.Magnifier>
                 <xctk:Magnifier Radius="200"
-                                ZoomFactor="{Binding ZoomFactor}"
+                                ZoomFactor="{Binding IsMagnifier,
+                                            Converter={StaticResource BoolToZoomFactorConverter}}"
                                 BorderThickness="3">
                 </xctk:Magnifier>
             </xctk:MagnifierManager.Magnifier>
@@ -54,7 +57,7 @@
 
             <!--#region Browser -->
 
-            <controls:AdaptiveViewBox IsScaled="{Binding IsDisabled}"
+            <controls:AdaptiveViewBox IsScaled="{Binding IsScaled}"
                                       Width="{Binding RelativeSource={RelativeSource Self},
                                                 Converter={StaticResource Resolution4KConverter},
                                                 ConverterParameter=Width}"
@@ -69,7 +72,8 @@
                               Converter={StaticResource Resolution4KConverter},
                               ConverterParameter=Width}">
                     <wpf:ChromiumWebBrowser Name="ChromiumWebBrowser"
-                                            IsEnabled="{Binding IsWebBrowserEnabled}"
+                                            IsEnabled="{Binding IsMagnifier,
+                                                        Converter={StaticResource InverseBoolConverter}}"
                                             Address="{Binding Url, Mode=TwoWay}">
                         <wpf:ChromiumWebBrowser.DownloadHandler>
                             <handlers:DownloadHandler />
@@ -166,24 +170,24 @@
                                 <Grid>
                                     <StackPanel Width="300"
                                                 HorizontalAlignment="Center">
-                                        <Button Style="{StaticResource DisableButtonsStyle}"
-                                                Command="{Binding InvertCommand}"
+                                        <CheckBox IsChecked="{Binding IsInverted}"
+                                                Style="{StaticResource DisableModeCheckBoxStyle}"
                                                 Margin="0 40">
                                             <ContentPresenter ContentTemplate="{StaticResource InvertIcon}"
                                                               Width="100" />
-                                        </Button>
-                                        <Button Style="{StaticResource DisableButtonsStyle}"
-                                                Command="{Binding MagnifierZoomCommand}"
+                                        </CheckBox>
+                                        <CheckBox IsChecked="{Binding IsMagnifier}" 
+                                                Style="{StaticResource DisableModeCheckBoxStyle}"
                                                 Margin="0 40">
                                             <ContentPresenter ContentTemplate="{StaticResource ZoomIcon}"
                                                               Width="100" />
-                                        </Button>
-                                        <Button Style="{StaticResource DisableButtonsStyle}"
-                                                Command="{Binding DisableCommand}"
+                                        </CheckBox>
+                                        <CheckBox IsChecked="{Binding IsScaled}"
+                                                Style="{StaticResource DisableModeCheckBoxStyle}"
                                                 Margin="0 40">
                                             <ContentPresenter ContentTemplate="{StaticResource DisabledIcon}"
                                                               Width="100" />
-                                        </Button>
+                                        </CheckBox>
                                         <Button Style="{StaticResource DisableButtonsStyle}"
                                                 Command="{Binding EarCommand}"
                                                 Margin="0 40"
@@ -289,14 +293,14 @@
                                             Width="200"
                                             Height="200"
                                             Visibility="Visible"
-                                            Command="{Binding BackCommand, ElementName=ChromiumWebBrowser}"
+                                            Command="{Binding GoBackCommand}"
                                             Margin="0 0 20 0">
                                         <ContentPresenter ContentTemplate="{StaticResource BackIcon}"
                                                           Width="100" />
                                     </Button>
                                 </StackPanel>
 
-                                <CheckBox x:Name="KeyboardCheckBox"
+                                <CheckBox IsChecked="{Binding IsKeyBoardVisible, Mode=TwoWay}"
                                           Style="{StaticResource KeyboardCheckBox}"
                                           Width="200"
                                           Height="200"
@@ -316,18 +320,9 @@
 
             <!--#region KeyBoard -->
             <Border Width="1300"
-                    Height="500">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=KeyboardCheckBox}"
-                                         Value="True">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
+                    Height="500"
+                    Visibility="{Binding IsKeyBoardVisible,
+                Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel>
                     <Border Background="{DynamicResource ButtonPanelBackground}"
                             CornerRadius="40 40 0 0"
@@ -335,20 +330,9 @@
                             Margin="0 0 0 -3"
                             Height="50"
                             Width="400">
-                        <b:Interaction.Triggers>
-                            <b:EventTrigger EventName="MouseDown">
-                                <b:InvokeCommandAction Command="{Binding StartMoveKeyboardCommand}"
-                                                       PassEventArgsToCommand="True" />
-                            </b:EventTrigger>
-                            <b:EventTrigger EventName="MouseMove">
-                                <b:InvokeCommandAction Command="{Binding DragKeyboardCommand}"
-                                                       PassEventArgsToCommand="True" />
-                            </b:EventTrigger>
-                            <b:EventTrigger EventName="MouseUp">
-                                <b:InvokeCommandAction Command="{Binding EndMoveKeyboardCommand}"
-                                                       PassEventArgsToCommand="True" />
-                            </b:EventTrigger>
-                        </b:Interaction.Triggers>
+                        <b:Interaction.Behaviors>
+                            <behaviors:DraggableBehavior/>
+                        </b:Interaction.Behaviors>
                     </Border>
                     <Border Background="{StaticResource ButtonPanelBackground}"
                             CornerRadius="15">

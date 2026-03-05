@@ -23,9 +23,9 @@ namespace DIClosedBrowserTemplate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void GoToPage(string url)
+        private void GoToSite(string url)
         {
-            _messenger.Send(new UpdateBrowserPageMessage(url));
+            //_messenger.Send(new UpdateBrowserPageMessage(url));
 
             _mainWindowViewModel.CloseViewModel();
         }

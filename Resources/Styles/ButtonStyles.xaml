@@ -123,6 +123,24 @@
         </Setter>
     </Style>
 
+    <Style TargetType="CheckBox" x:Key="DisableModeCheckBoxStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <Border Background="{DynamicResource ButtonBackground}"
+                                Width="200" Height="200"
+                                CornerRadius="60"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="components:RoundedButton" x:Key="DefaultKeyboardButtonStyles"
            BasedOn="{StaticResource BaseButtonStyle}">
         <Setter Property="Foreground" Value="White" />

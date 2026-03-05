@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="131.2.70" />
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="131.2.70" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="144.0.120" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="144.0.120" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />

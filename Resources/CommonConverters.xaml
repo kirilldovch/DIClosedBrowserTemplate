@@ -6,4 +6,7 @@
     <converters:Resolution4KConverter x:Key="Resolution4KConverter"/>
     <converters:JavaScriptMessageConverter x:Key="JavaScriptMessageConverter"/>
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:BoolToZoomFactorConverter x:Key="BoolToZoomFactorConverter"/>
+    <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    <converters:ColorInvertConverter x:Key="ColorInvertConverter"/>
 </ResourceDictionary>
